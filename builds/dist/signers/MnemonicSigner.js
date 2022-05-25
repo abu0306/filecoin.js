@@ -88,7 +88,7 @@ var MnemonicSigner = /** @class */ (function () {
                     case 2:
                         key = _b.apply(_a, _c.concat([_d.sent()]));
                         _address = key.address;
-                        test_address = _address.substr(1, _address.length - 2);
+                        test_address = 't' + _address.substr(1, _address.length - 2);
                         this.addresses.push(test_address);
                         this.privKeys[test_address] = key.private_hexstring;
                         return [2 /*return*/];
