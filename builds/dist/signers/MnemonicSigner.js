@@ -70,13 +70,13 @@ var MnemonicSigner = /** @class */ (function () {
         var pathParts = path.split('/');
         if (pathParts.length === 6) {
             var hdPathIndex = pathParts.splice(pathParts.length - 1, 1);
-            this.hdIndex = parseInt(hdPathIndex[0].replace("'", ""));
+            this.hdIndex = parseInt(hdPathIndex[0].replace('\'', ''));
         }
         this.path = pathParts.join('/');
     }
     MnemonicSigner.prototype.initAddresses = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var key, _a, _b, _c;
+            var key, _a, _b, _c, _address, test_address;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -87,8 +87,10 @@ var MnemonicSigner = /** @class */ (function () {
                         return [4 /*yield*/, this.getPassword()];
                     case 2:
                         key = _b.apply(_a, _c.concat([_d.sent()]));
-                        this.addresses.push(key.address);
-                        this.privKeys[key.address] = key.private_hexstring;
+                        _address = key.address;
+                        test_address = _address.substr(1, _address.length - 2);
+                        this.addresses.push(test_address);
+                        this.privKeys[test_address] = key.private_hexstring;
                         return [2 /*return*/];
                 }
             });
@@ -104,7 +106,9 @@ var MnemonicSigner = /** @class */ (function () {
                     case 1:
                         _a.sent();
                         _a.label = 2;
-                    case 2: return [2 /*return*/, this.addresses.filter(function (a, i) { return a != ''; })];
+                    case 2: return [2 /*return*/, this.addresses.filter(function (a, i) {
+                            return a != '';
+                        })];
                 }
             });
         });

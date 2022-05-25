@@ -1,7 +1,7 @@
 import * as filecoin_signer from '@zondax/filecoin-signing-tools';
 import { DEFAULT_HD_PATH, Message, SignedMessage } from '../providers/Types';
 import { Signer } from './Signer';
-import { StringGetter } from '../providers/Types'
+import { StringGetter } from '../providers/Types';
 
 export class MnemonicSigner implements Signer {
   private privKeys: any = [];
@@ -18,20 +18,24 @@ export class MnemonicSigner implements Signer {
     const pathParts = path.split('/');
     if (pathParts.length === 6) {
       const hdPathIndex = pathParts.splice(pathParts.length - 1, 1);
-      this.hdIndex = parseInt(hdPathIndex[0].replace("'",""));
+      this.hdIndex = parseInt(hdPathIndex[0].replace('\'', ''));
     }
     this.path = pathParts.join('/');
   }
 
   public async initAddresses(): Promise<void> {
     const key = filecoin_signer.keyDerive(await this.getMnemonic(), this.path, await this.getPassword());
-    this.addresses.push(key.address);
-    this.privKeys[key.address] = key.private_hexstring;
+    const _address = key.address;
+    const test_address = _address.substr(1, _address.length - 2);
+    this.addresses.push(test_address);
+    this.privKeys[test_address] = key.private_hexstring;
   }
 
   public async getAddresses(): Promise<string[]> {
     if (this.addresses.length === 0) await this.initAddresses();
-    return this.addresses.filter((a, i) => { return a != '' });
+    return this.addresses.filter((a, i) => {
+      return a != '';
+    });
   }
 
   async newAddress(n: number) {
@@ -81,7 +85,7 @@ export class MnemonicSigner implements Signer {
 
   public async sign(message: Message): Promise<SignedMessage> {
     if (this.addresses.length === 0) await this.initAddresses();
-    if (!this.privKeys[message.From]){
+    if (!this.privKeys[message.From]) {
       throw new Error('From address not found');
     }
     const key = this.privKeys[message.From];
@@ -118,7 +122,7 @@ export class MnemonicSigner implements Signer {
       gaspremium: message.GasPremium.toString(),
       method: message.Method,
       params: message.Params,
-    }
+    };
   }
 
 }
