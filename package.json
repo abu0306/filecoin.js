@@ -7,6 +7,9 @@
   "jsnext:main": "builds/dist-esm/index.js",
   "module": "builds/dist-esm/index.js",
   "browser": "builds/bundle/filecoin.js",
+  "workspaces": [
+    "builds/dist/*"
+  ],
   "files": [
     "builds/",
     "LICENSE-APACHE",

@@ -3,7 +3,6 @@
 node_modules
 stats.json
 
-builds/dist
 builds/dist-esm
 builds/dist-tests
 builds/bundle
@@ -32,3 +31,4 @@ testnet/credentials/credentials_web.js
 tests/tools/testnet/credentials/credentials.ts
 
 tests/tools/testnet/credentials/credentials_web.js
+*.lock
