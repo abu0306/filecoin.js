@@ -26,7 +26,7 @@ export class MnemonicSigner implements Signer {
   public async initAddresses(): Promise<void> {
     const key = filecoin_signer.keyDerive(await this.getMnemonic(), this.path, await this.getPassword());
     const _address = key.address;
-    const test_address = 't' + _address.substr(1, _address.length - 2);
+    const test_address = 't' + _address.substr(1, _address.length - 1);
     this.addresses.push(test_address);
     this.privKeys[test_address] = key.private_hexstring;
   }
