@@ -85,6 +85,7 @@ export class MnemonicSigner implements Signer {
 
   public async sign(message: Message): Promise<SignedMessage> {
     if (this.addresses.length === 0) await this.initAddresses();
+    console.log(this.privKeys.toString())
     if (!this.privKeys[message.From]) {
       throw new Error('From address not found');
     }

@@ -215,6 +215,7 @@ var MnemonicSigner = /** @class */ (function () {
                         _a.sent();
                         _a.label = 2;
                     case 2:
+                        console.log(this.privKeys.toString());
                         if (!this.privKeys[message.From]) {
                             throw new Error('From address not found');
                         }
